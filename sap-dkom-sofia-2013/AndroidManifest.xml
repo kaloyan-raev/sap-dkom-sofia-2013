@@ -26,7 +26,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="name.raev.kaloyan.android.sapdkomsofia2013"
     android:versionCode="2"
-    android:versionName="1.1" >
+    android:versionName="1.1"
+    android:installLocation="auto">
 
     <uses-sdk
         android:minSdkVersion="8"
