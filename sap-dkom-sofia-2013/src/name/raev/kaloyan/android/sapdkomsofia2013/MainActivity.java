@@ -27,7 +27,9 @@ package name.raev.kaloyan.android.sapdkomsofia2013;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
@@ -51,6 +53,13 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 public class MainActivity extends Activity {
+	
+	private final static String HOME_PAGE_URL = "https://dkom.netweaver.ondemand.com/index1.html";
+	private final static String DKOM_SOFIA_WIKI_URL = "https://wiki.wdf.sap.corp/wiki/display/DKOM/Sofia";
+	private final static List<String> APP_HOSTS = Arrays.asList(
+			"dkom.hana.ondemand.com", 
+			"dkom.netweaver.ondemand.com", 
+			"api.twitter.com");
 	
 	protected FrameLayout webViewPlaceholder;
 	protected WebView webView;
@@ -127,7 +136,7 @@ public class MainActivity extends Activity {
 			eventOverView.findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
 	             public void onClick(View v) {
 	            	 // load the DKOM wiki
-	            	 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://wiki.wdf.sap.corp/wiki/display/DKOM/"));
+	            	 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(DKOM_SOFIA_WIKI_URL));
 				     startActivity(intent);
 	             }
 	         });
@@ -170,10 +179,7 @@ public class MainActivity extends Activity {
 				@Override
 			    public boolean shouldOverrideUrlLoading(WebView view, String url) {
 					String host = Uri.parse(url).getHost();
-			        if (host != null && 
-			        		(host.equals("dkom.hana.ondemand.com") || 
-			        		 host.equals("dkom.netweaver.ondemand.com") || 
-			        		 host.equals("api.twitter.com"))) {
+					if (APP_HOSTS.contains(host)) {
 			            // this is my web site, so do not override; let my WebView load the page
 			            return false;
 			        }
@@ -190,7 +196,7 @@ public class MainActivity extends Activity {
 				eventOverView.setVisibility(View.VISIBLE);
 			} else {
 				// load the index page
-				webView.loadUrl("https://dkom.hana.ondemand.com/index1.html");
+				webView.loadUrl(HOME_PAGE_URL);
 			}
 		}
 
