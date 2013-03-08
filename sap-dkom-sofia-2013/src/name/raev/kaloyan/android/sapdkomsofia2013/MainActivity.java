@@ -179,8 +179,8 @@ public class MainActivity extends Activity {
 				@Override
 			    public boolean shouldOverrideUrlLoading(WebView view, String url) {
 					String host = Uri.parse(url).getHost();
-					if (APP_HOSTS.contains(host)) {
-			            // this is my web site, so do not override; let my WebView load the page
+					if (APP_HOSTS.contains(host) && // this is my web site - let my WebView load the page
+							!url.contains("/ical/")) { // this is *.ics file - download with external browser
 			            return false;
 			        }
 			        // otherwise, the link is not for a page on my site, so launch another Activity that handles URLs
